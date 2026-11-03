@@ -1,20 +1,25 @@
-name: terrform pipeline self hosting
 
-on: workflow_disptch
+name: Terraform Pipeline Self Hosting
 
-job: 
+on:
+  workflow_dispatch:
+
+jobs:
   terraform:
-    runs-on: [amazonLinux,dev,selfhosted]
+    runs-on: [self-hosted, linux, x64, amazonlinux, dev]
 
-    steps: 
-      - name: checkout code
+    steps:
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-     -  name: Terraform init
-        run : terraform init
+      - name: Check Terraform
+        run: terraform version
 
-     -  name: Terraform plan
-        run : terraform plan
+      - name: Terraform Init
+        run: terraform init
 
-     -  name: Terraform apply
-        run : terraform apply -auto-approve
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
