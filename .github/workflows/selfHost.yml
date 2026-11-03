@@ -1,0 +1,20 @@
+name: terrform pipeline self hosting
+
+on: workflow_disptch
+
+job: 
+  terraform:
+    runs-on: [amazonLinux,dev,selfhosted]
+
+    steps: 
+      - name: checkout code
+        uses: actions/checkout@v4
+
+     -  name: Terraform init
+        run : terraform init
+
+     -  name: Terraform plan
+        run : terraform plan
+
+     -  name: Terraform apply
+        run :terraform apply -auto-approve
